@@ -45,9 +45,7 @@ const app = createApp({
         };
     },
     computed: {
-        resultado() {
-            return (this.costo * 1.35).toFixed(2); // Calcula automáticamente
-        }
+        
     },
     mounted() {
         this.listarProducto(); // 🔹 Se ejecuta automáticamente al montar el componente

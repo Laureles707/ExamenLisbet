@@ -32,32 +32,34 @@ namespace Examen.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody]  LoginRequestDto obj)
         {
-            
+            ResponseDto responseDto = new();
+
             try
             {
-                ResponseDto? responseDto = await _authService.LoginAsync(obj);
+                responseDto = await _authService.LoginAsync(obj);
 
-                if (responseDto != null && responseDto.IsSuccess)
+                if (responseDto != null && responseDto.IsSuccess && responseDto.Result != null)
                 {
                     LoginResponseDto loginResponseDto =
-                        JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDto.Result));
+                        JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDto.Result)) ?? new LoginResponseDto();
 
                     await SignInUser(loginResponseDto);
                     _tokenProvider.SetToken(loginResponseDto.Token);
-                    // return RedirectToAction("Index", "Home");
+
                     return Ok(responseDto);
                 }
                 else
                 {
-                    TempData["error"] = responseDto.Message;
-              
+                    TempData["error"] = responseDto?.Message ?? "Error en el inicio de sesión.";
+                    return BadRequest(responseDto); // Devolver un código 400 en caso de error
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                return StatusCode(500, new { IsSuccess = false, Message = "Error interno del servidor", Details = ex.Message });
             }
-            return View(obj);
+
+            
         }
         private async Task SignInUser(LoginResponseDto model)
         {

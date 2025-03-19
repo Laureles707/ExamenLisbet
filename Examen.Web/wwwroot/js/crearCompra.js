@@ -39,7 +39,7 @@ const app = createApp({
             precioVenta: 0,
             stock: 0,
             precioEditable: 0,
-            costoEditable:0
+            costoEditable: 0
         };
     },
     computed: {
@@ -160,7 +160,8 @@ const app = createApp({
             this.productoSeleccionado = "";
         },
         async guardarProducto() {
-            if (this.nombreProducto == "" || this.nroLote <= 0 || this.costo <= 0 || this.precioVenta <= 0 || this.stock <= 0) {
+            debugger;
+            if (this.nombreProducto == "" || this.nroLote <= 0 || this.precioVenta <= 0 || this.stock <= 0) {
                 alert("Ingrese todos los datos correctamente.");
                 return;
             }
@@ -169,7 +170,7 @@ const app = createApp({
          
                 Nombre_producto: this.nombreProducto,
                 NroLote:this.nroLote,
-                Costo: this.costo,
+                Costo: this.precioVenta - (this.precioVenta * 0.35),
                 PrecioVenta: this.precioVenta,
                 Stock: this.stock
                 

@@ -49,8 +49,9 @@ const app = createApp({
                 const response = await fetch(`/movimiento/getMovimientoProducto?id=${item}`, {
                     method: "GET"
                 });
-                const data = await response.json();
-                this.listaMovProductos = data;
+              
+            this.listaMovProductos = await response.json();
+                
                 if (!response.ok) {
                     throw new Error("Error al obtener los movimientos");
                 }

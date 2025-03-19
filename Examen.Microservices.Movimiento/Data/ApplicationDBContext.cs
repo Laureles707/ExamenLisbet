@@ -11,11 +11,6 @@ namespace Examen.Microservices.Movimiento.Data
            
         }
 
-        public DbSet<Producto> Productos { get; set; }
-
-        public DbSet<CompraCab> CompraCabs { get; set; }
-
-        public DbSet<CompraDet> CompraDets { get; set; }
         public DbSet<MovimientoCab> MovimientoCabs { get; set; }
         public DbSet<MovimientoDet> MovimientoDets { get; set; }
  

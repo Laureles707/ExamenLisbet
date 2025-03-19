@@ -1,6 +1,8 @@
 using System.Text;
 using Examen.Microservices.Compras.Mappers;
 using Examen.Microservices.Venta.Data;
+using Examen.Microservices.Venta.Repository;
+using Examen.Microservices.Venta.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -39,7 +41,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(opciones =>
 //agregamos el automapper
 builder.Services.AddAutoMapper(typeof(VentaMapper));
 
-
+builder.Services.AddScoped<IVentaRepository, VentaRepository>();
 
 
 

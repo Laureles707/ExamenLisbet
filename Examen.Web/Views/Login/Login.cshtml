@@ -32,7 +32,11 @@
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Ingresar</button>
                         </form>
-                        <p v-if="errorMessage" class="text-danger mt-2">{{ errorMessage }}</p>
+                        <div class="alert alert-dismissible alert-danger" v-if="errorMessage">
+                            <button type="button" class="btn-close" data-bs-dismiss="alerta"></button>
+                            <strong>Validación!</strong> <a href="#" class="alert-link">{{ errorMessage }}</a>
+                        </div>
+                        <p v-if="errorMessage" class="text-danger mt-2"></p>
                     </div>
                 </div>
             </div>

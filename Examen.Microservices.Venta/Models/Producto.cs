@@ -8,7 +8,7 @@ namespace Examen.Microservices.Compras.Models
         [Key]
         public int Id_Producto { get; set; }
         [Required]
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "nvarchar(150)")]
         public string Nombre_producto { get; set; }
         [Required]
         [Column(TypeName = "int")]

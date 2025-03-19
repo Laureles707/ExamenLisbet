@@ -5,6 +5,7 @@ using Examen.Microservices.Movimiento.Data;
 using Examen.Microservices.Movimiento.Models;
 using Examen.Microservices.Movimiento.Models.Dto;
 using Examen.Microservices.Movimiento.Models.Dtos;
+using Examen.Microservices.Movimiento.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -21,17 +22,14 @@ namespace Examen.Microservices.Movimiento.Controllers
     public class MovimientoController : ControllerBase
     {
 
-        private ResponseDto _response;
-        private readonly IMapper _mapper;
-        private readonly ApplicationDBContext _db;
+    
+        private readonly IMovimientoRepository _movRepository;
 
-
-        public MovimientoController(IMapper mapper, ApplicationDBContext db)
+        public MovimientoController(IMapper mapper, IMovimientoRepository movRepository)
         {
        
-            _mapper = mapper;
-            _db = db;
-            _response = new ResponseDto();
+        
+            _movRepository = movRepository;
         }
 
 
@@ -39,34 +37,13 @@ namespace Examen.Microservices.Movimiento.Controllers
         [Route("GetKardex/{Idproducto:int}")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ResponseDto GetKardex( int Idproducto )
+        public async Task<IActionResult> GetKardex( int Idproducto )
         {
-            
 
-            try
-            {
-               
-                var objListMov = (
-                               from c in _db.MovimientoCabs
-                               join d in _db.MovimientoDets on c.Id_MovimientoCab equals d.Id_movimientocab into detalles
-                               from mc in detalles.DefaultIfEmpty() // Left Join 
-                               where mc.Id_Producto == Idproducto
-                               select new MovimientoProductoDto
-                               {
-                                   fecha_registro = c.Fec_registro.ToString("dd/mm/yyyy hh:mm:ss"),
-                                   tipo_movimiento =(c.Id_TipoMovimiento == 1)?"Entrada":"Salida",
-                                   cantidad = mc.Cantidad
-                               }).ToList();
-
-                IEnumerable<MovimientoProductoDto> objList = objListMov.ToList();
-                _response.Result = _mapper.Map<IEnumerable<MovimientoProductoDto>>(objList);
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-            return _response;
+            var response = await _movRepository.GetKardexAsync(Idproducto);
+            if (response.IsSuccess)
+                return Ok(response);
+            return BadRequest(response);
         }
 
 

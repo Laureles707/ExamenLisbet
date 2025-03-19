@@ -80,9 +80,9 @@
 
 		</div>
 		<div class="card-footer">
-			<h5>Sub Total: S/ {{ compraCabecera.SubTotal.toFixed(2 }}</h5>
-			<h5>Total Impuesto: S/ {{ compraCabecera.Igv.toFixed(2 }}</h5>
-			<h5>Total: S/ {{ compraCabecera.Total.toFixed(2 }}</h5>
+			<h5>Sub Total: S/ {{ compraCabecera.SubTotal.toFixed(2) }}</h5>
+			<h5>Total Impuesto: S/ {{ compraCabecera.Igv.toFixed(2) }}</h5>
+			<h5>Total: S/ {{ compraCabecera.Total.toFixed(2) }}</h5>
 
 		</div>
 	</div>
@@ -104,13 +104,13 @@
 							<label for="lote" class="col-form-label">Nro Lote :</label>
 							<input type="number" class="form-control" v-model="nroLote" id="nroLote">
 						</div>
-						<div class="mb-3">
+						@* <div class="mb-3">
 							<label for="costo-prod" class="col-form-label">Costo :</label>
 							<input type="number" class="form-control" v-model="costo" id="costo">
-						</div>
+						</div> *@
 						<div class="mb-3">
 							<label for="precio-venta" class="col-form-label">Precio Venta :</label>
-							<input type="number" class="form-control" :value="resultado" id="precioVenta">
+							<input type="number" class="form-control" id="precioVenta" v-model="precioVenta">
 						</div>
 						<div class="mb-3">
 							<label for="stock-prod" class="col-form-label">Stock :</label>

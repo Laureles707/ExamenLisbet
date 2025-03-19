@@ -10,7 +10,19 @@ const app = Vue.createApp({
     },
     methods: {
         async login() {
+            if (this.username === "" || this.password === "") {
+                window.Swal.fire({
+                    title: "Error",
+                    text: "Debe ingresar usuario y contraseña",
+                    icon: "warning",
+                    confirmButtonText: "OK"
+                });
+                return; // Sale de la función sin continuar con el fetch
+            }
+
             try {
+
+
                 debugger;
                 const obj = {
                     UserName: this.username,
@@ -29,22 +41,31 @@ const app = Vue.createApp({
                 })
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Login exitoso:", data);
-                        window.location.href = "/Home/Index";
-                        // Mostrar SweetAlert2
-                        window.Swal.fire({
-                            title: "¡Éxito!",
-                            text: "Bienvenido al sistema",
-                            icon: "success",
-                            confirmButtonText: "OK"
-                        }).then(() => {
-                            // Redirigir al después de cerrar la alerta
-                           
-                        });
+                        debugger;
+                        if (data.isSuccess) {
+                            window.location.href = "/Home/Index";
+                            console.log("Login exitoso:", data);
+
+                            // Mostrar SweetAlert2
+                            //window.Swal.fire({
+                            //    title: "¡Éxito!",
+                            //    text: "Bienvenido al sistema",
+                            //    icon: "success",
+                            //    confirmButtonText: "OK"
+                            //}).then(() => {
+                            //    // Redirigir al después de cerrar la alerta
+                              
+                            //});
+                        }
+                        else {
+                            this.errorMessage = data.message;
+                        }
+
                     })
                     .catch(error => {
-                       // this.errorMessage = data.message || "Credenciales incorrectas";
-                        console.error("Error:", error)
+                        // this.errorMessage = data.message || "Credenciales incorrectas";
+                        console.error("Error:", error);
+
                     });
 
             } catch (error) {

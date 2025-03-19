@@ -7,11 +7,9 @@ namespace Examen.Microservices.Movimiento.Mappers
     public class MovimientoMapper : Profile
     {
         public MovimientoMapper() {
-            CreateMap<Producto, ProductoDto>().ReverseMap();
-            CreateMap<Producto, CrearProductoDto>().ReverseMap();
+          
+            CreateMap<MovimientoProductoDto, MovimientoCab>().ReverseMap();
 
-            CreateMap<CompraCab, CompraDto>().ReverseMap();
-            CreateMap<CompraCab, CrearCompraDto>().ReverseMap();
         }
 
    

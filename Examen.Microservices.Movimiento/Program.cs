@@ -1,6 +1,8 @@
 using System.Text;
 using Examen.Microservices.Movimiento.Data;
 using Examen.Microservices.Movimiento.Mappers;
+using Examen.Microservices.Movimiento.Repository;
+using Examen.Microservices.Movimiento.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -40,7 +42,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(opciones =>
 //agregamos el automapper
 builder.Services.AddAutoMapper(typeof(MovimientoMapper));
 
-
+builder.Services.AddScoped<IMovimientoRepository, MovimientoRepository>();
 
 
 

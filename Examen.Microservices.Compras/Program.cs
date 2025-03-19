@@ -1,8 +1,9 @@
 using System.Text;
 using Examen.Microservices.Compras.Data;
 using Examen.Microservices.Compras.Mappers;
-using Examen.Microservices.Compras.Repositorio;
-using Examen.Microservices.Compras.Repositorio.IRepositorio;
+using Examen.Microservices.Compras.Repository;
+using Examen.Microservices.Compras.Repository.IRepository;
+using Examen.Microservices.Compras.Sevice.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -37,16 +38,12 @@ builder.Services.AddAuthorization();
 builder.Services.AddDbContext<ApplicationDBContext>(opciones =>
                     opciones.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSql")));
 
-//agregamos los repositorios
-builder.Services.AddScoped<ICompraRepositorio, CompraRepositorio>();
-builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
-
 //agregamos el automapper
 builder.Services.AddAutoMapper(typeof(ComprasMapper));
 
 
-
-
+builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
+builder.Services.AddScoped<ICompraRepository, CompraRepository>();
 
 builder.Services.AddCors(options =>
 {
