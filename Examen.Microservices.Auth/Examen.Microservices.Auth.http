@@ -1,0 +1,6 @@
+@Examen.Microservices.Auth_HostAddress = http://localhost:5295
+
+GET {{Examen.Microservices.Auth_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

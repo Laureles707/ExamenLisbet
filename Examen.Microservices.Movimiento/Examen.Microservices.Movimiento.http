@@ -1,0 +1,6 @@
+@Examen.Microservices.Movimiento_HostAddress = http://localhost:5110
+
+GET {{Examen.Microservices.Movimiento_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

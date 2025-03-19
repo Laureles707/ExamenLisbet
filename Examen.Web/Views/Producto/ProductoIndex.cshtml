@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ProductoDto>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<div class="card shadow border-0 mt-4">
+	<div class="card-header  bg-info bg-gradient text-white  ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="text-black">Listado de Productos</h1>
+			</div>
+		</div>
+	</div>
+	<div class="card-body p-4">
+		<div class="row pb-3">
+			<div class="col-6">
+			</div>
+			<div class="col-6 text-end">
+				<a asp-action="CrearProducto" class="btn btn-outline-primary"><i class="bi bi-plus-square"></i> Crear producto</a>
+
+			</div>
+		</div>
+		<table class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>
+						Id
+					</th>
+					<th>
+						Producto
+					</th>
+					<th>
+						N° Lote
+					</th>
+					<th>
+						Fecha de Registro
+					</th>
+					<th>
+						Costo
+					</th>
+					<th>
+						Precio de Venta
+					</th>
+					<th>
+						Stock
+					</th>
+					<th>
+						Opciones
+					</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@item.Id_Producto
+						</td>
+						<td>
+							@item.Nombre_producto
+						</td>
+						<td>
+							@item.NroLote
+						</td>
+						<td>
+							@item.Fec_registro
+						</td>
+						<td>
+							@item.Costo
+						</td>
+						<td>
+							@item.PrecioVenta
+						</td>
+						<td>
+							@item.Stock
+						</td>
+						 <td>
+			
+							<i class="bi bi-trash"></i>
+						
+					</td>  
+					</tr>
+				}
+			</tbody>
+		</table>
+
+	</div>
+
+</div>
